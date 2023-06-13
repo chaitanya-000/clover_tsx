@@ -1,15 +1,11 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import styled from 'styled-components';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const App = () => {
-  const LineDividerText_OR = styled.Text`
-    color: #ff0000;
-    font-weight: 600;
-  `;
   return (
     <View>
-      <LineDividerText_OR>Test</LineDividerText_OR>
+      <AntDesign name="downcircle" size={230} color="orange" />
     </View>
   );
 };
