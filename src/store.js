@@ -67,6 +67,7 @@ const useAuthStore = create(set => ({
 
   //logout
   logout: async () => {
+    console.log('-------------------');
     await AsyncStorage.removeItem('token');
     set({hasToken: false});
   },

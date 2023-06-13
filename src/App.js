@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import {useEffect} from 'react';
 import QuickSale from './screens/QuickSale';
 import Payment from './screens/Payment';
 import Refund from './screens/Refund';
@@ -12,11 +12,18 @@ import Login from './screens/Login';
 import Register from './screens/Register';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DrawerNavigation from './DrawerNavigation';
+import {useStore} from 'zustand';
+import useAuthStore from './store';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const hasToken = true;
+  const hasToken = useStore(useAuthStore, state => state.hasToken);
+  const getToken = useStore(useAuthStore, state => state.getToken);
+
+  useEffect(() => {
+    getToken();
+  }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -28,10 +35,6 @@ export default function App() {
             />
             <Stack.Screen name="PaymentLogs" component={PaymentLogs} />
             <Stack.Screen name="QuickSale" component={QuickSale} />
-            {/* <Stack.Screen
-              name="PaymentDetails_Receipt"
-              component={PaymentDetails_Receipt}
-            /> */}
             <Stack.Screen name="Refund" component={Refund} />
             <Stack.Screen name="BankDetails" component={BankDetails} />
             <Stack.Screen name="ProfileUpdate" component={ProfileUpdate} />
